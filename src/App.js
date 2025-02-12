@@ -1,5 +1,6 @@
 import "./App.css";
 import Navbar from "./component/Navbar";
+import Addproduct from "./component/pages/Addproduct";
 import Home from "./component/pages/Home";
 import Products from "./component/pages/Products";
 import Sidebar from "./component/Sidebar";
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/product/add" element={<Addproduct />} />
           </Routes>
         </div>
       </div>
