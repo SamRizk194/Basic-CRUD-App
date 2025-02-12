@@ -10,10 +10,10 @@ function App() {
     <div className="App">
       <Navbar />
       <div className="row">
-        <div className="col-3 sidebar">
+        <div className="col-2 sidebar">
           <Sidebar />
         </div>
-        <div className="col-9">
+        <div className="col-10">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
