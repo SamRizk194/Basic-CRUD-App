@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./products.css";
+import Swal from "sweetalert2";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -17,12 +18,21 @@ function Products() {
       .then((data) => setProducts(data));
   };
 
-  const deleteProduct = (productId) => {
-    fetch(`http://localhost:5000/products/${productId}`, { method: "DELETE" })
-      .then((res) => res.json())
-      .then(() => {
-        getAllProduct();
-      });
+  const deleteProduct = (product) => {
+    Swal.fire({
+      title: `Are You Sure To Delete ${product.title} ?`,
+      showCancelButton: true,
+    }).then((data) => {
+      if (data.isConfirmed) {
+        fetch(`http://localhost:5000/products/${product.id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then(() => {
+            getAllProduct();
+          });
+      }
+    });
   };
 
   return (
@@ -52,7 +62,7 @@ function Products() {
                 <td>
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={() => deleteProduct(product.id)}
+                    onClick={() => deleteProduct(product)}
                   >
                     Delete
                   </button>
