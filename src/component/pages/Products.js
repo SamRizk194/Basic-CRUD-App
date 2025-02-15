@@ -6,10 +6,24 @@ function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products", { method: "GET" })
+    getAllProduct();
+  }, []);
+
+  const getAllProduct = () => {
+    fetch("http://localhost:5000/products", {
+      method: "GET",
+    })
       .then((res) => res.json())
       .then((data) => setProducts(data));
-  }, []);
+  };
+
+  const deleteProduct = (productId) => {
+    fetch(`http://localhost:5000/products/${productId}`, { method: "DELETE" })
+      .then((res) => res.json())
+      .then(() => {
+        getAllProduct();
+      });
+  };
 
   return (
     <>
@@ -36,7 +50,12 @@ function Products() {
                 <td>{product.description.slice(0, 15)}...</td>
                 <td>{product.price}</td>
                 <td>
-                  <button className="btn btn-danger btn-sm">Delete</button>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => deleteProduct(product.id)}
+                  >
+                    Delete
+                  </button>
                   <Link
                     to={`/product/${product.id}`}
                     className="btn btn-info btn-sm"

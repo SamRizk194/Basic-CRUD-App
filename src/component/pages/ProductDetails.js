@@ -11,14 +11,15 @@ function ProductDetails() {
       .then((data) => setProduct(data));
   }, []);
 
-  if (!product) {
-    return <h1>Loading...</h1>;
-  }
-
   return (
     <>
-      {product.image && <img src={product.image} alt={product.title} />}
-      <h1>{product.title}</h1>
+      {product && (
+        <>
+          <img src={product.image} alt={product.title} />
+          <h1 className="mt-5">{product.title}</h1>
+          <h4 className="mt-5">{product.description}</h4>
+        </>
+      )}
     </>
   );
 }
