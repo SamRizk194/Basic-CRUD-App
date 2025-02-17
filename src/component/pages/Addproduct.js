@@ -1,7 +1,23 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function Addproduct() {
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState(0);
+  let navigate = useNavigate();
+
   const formSubmit = (e) => {
     e.preventDefault();
+
+    fetch("http://localhost:5000/products", {
+      method: "POST",
+      headers: { "Content-Type": "Application/json" },
+      body: JSON.stringify({ title, price }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+    navigate("/products");
   };
+
   return (
     <>
       <h1>Add Product</h1>
@@ -11,6 +27,9 @@ function Addproduct() {
             Title
           </label>
           <input
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
             type="text"
             className="form-control"
             id="productTitle"
@@ -24,6 +43,9 @@ function Addproduct() {
             Price
           </label>
           <input
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}
             type="number"
             className="form-control"
             id="productPrice"
