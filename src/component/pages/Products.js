@@ -47,7 +47,6 @@ function Products() {
           <tr>
             <th>ID</th>
             <th>Title</th>
-            <th>Description</th>
             <th>Price</th>
           </tr>
         </thead>
@@ -57,7 +56,6 @@ function Products() {
               <tr key={product.id}>
                 <td>{product.id}</td>
                 <td>{product.title}</td>
-                <td>{product.description.slice(0, 15)}...</td>
                 <td>{product.price}</td>
                 <td>
                   <button

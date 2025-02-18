@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 function Addproduct() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
@@ -14,7 +15,9 @@ function Addproduct() {
       body: JSON.stringify({ title, price }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+      });
     navigate("/products");
   };
 
